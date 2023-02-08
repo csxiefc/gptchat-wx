@@ -4,8 +4,18 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * @author xiefc
+ */
 public class HashUtil {
-    //根据指定的hash算法，对传入的内容进行hash
+
+    /**
+     * 根据指定的hash算法，对传入的内容进行hash
+     *
+     * @param content
+     * @param algorithm
+     * @return
+     */
     public static String hash(String content, String algorithm) {
         if (content.isEmpty()) {
             return "";

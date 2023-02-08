@@ -21,8 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/*
+
+/**
  * 消息处理工具类
+ * @author xiefc
  */
 @Slf4j
 public class MessageUtil {
@@ -58,7 +60,7 @@ public class MessageUtil {
      */
     public static Map<String, String> xmlToMap(HttpServletRequest request ) throws DocumentException, IOException
     {
-        Map<String,String> map = new HashMap<String, String>();
+        Map<String,String> map = new HashMap<String, String>(3);
         try {
             SAXReader reader = new SAXReader();
             System.out.println(request.getInputStream());
@@ -88,7 +90,7 @@ public class MessageUtil {
     public static Map<String,String> string2Map(String reqString) {
         try {
             String xml = reqString;
-            Map<String,String> maps = new HashMap<>();
+            Map<String,String> maps = new HashMap<>(3);
             Document document = DocumentHelper.parseText(xml);
             System.out.println(document.asXML());
             Element root = document.getRootElement();
@@ -122,7 +124,7 @@ public class MessageUtil {
         text.setFromUserName(toUserName);
         text.setToUserName(fromUserName);
         text.setMsgType(MESSAGE_TEXT);
-        text.setCreateTime(new Date().getTime());
+        text.setCreateTime(System.currentTimeMillis());
         text.setContent(content);
         return textMessageToXml(text);
     }
@@ -136,7 +138,7 @@ public class MessageUtil {
         imageMessage.setFromUserName(toUserName);
         imageMessage.setToUserName(fromUserName);
         imageMessage.setMsgType(MESSAGE_IMAGE);
-        imageMessage.setCreateTime(new Date().getTime());
+        imageMessage.setCreateTime(System.currentTimeMillis());
         imageMessage.setImage(image);
         message = textImgToXml(imageMessage);
         return message;

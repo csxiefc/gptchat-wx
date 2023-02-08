@@ -1,6 +1,5 @@
 package plat.wx;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +13,9 @@ import javax.servlet.ServletContextListener;
 /**
  * 启动程序
  * 
- * @author ruoyi
+ * @author xiefc
  */
+@Slf4j
 @EnableAsync
 @SpringBootApplication
 @ServletComponentScan
@@ -25,13 +25,13 @@ public class WxAdminApplication {
         return new ServletContextListener() {
             @Override
             public void contextInitialized(ServletContextEvent sce) {
-                // log.info("ServletContext initialized");
+                log.info("ServletContext initialized");
             }
 
             @Override
             public void contextDestroyed(ServletContextEvent sce) {
 
-                //log.info("ServletContext destroyed");
+                log.info("ServletContext destroyed");
             }
         };
     }

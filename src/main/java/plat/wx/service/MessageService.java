@@ -1,7 +1,4 @@
-
 package plat.wx.service;
-
-
 
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.DocumentException;
@@ -14,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * @author xiefc
+ */
 @Slf4j
 @Service
 public class MessageService  {
@@ -21,8 +21,14 @@ public class MessageService  {
     @Resource
     GptChatService gptChatService;
 
-    /*
+
+    /**
      * 响应post请求，微信中消息和菜单交互都是采用post请求
+     *
+     * @param request
+     * @return
+     * @throws DocumentException
+     * @throws IOException
      */
     public String messageRequest(HttpServletRequest request) throws DocumentException, IOException {
         String respMessage = "";
@@ -38,14 +44,13 @@ public class MessageService  {
             String msgType = requestMap.get("MsgType");
             // 消息内容
             String content = requestMap.get("Content");
-            // log.info("FromUserName is:" + fromUserName + ", ToUserName is:" + toUserName + ", MsgType is:" + msgType);
-
             if (MessageUtil.MESSAGE_TEXT.equals(msgType)) {
                 respMessage = gptChatService.chat(content,fromUserName);
-            } else if (MessageUtil.MESSAGE_IMAGE.equals(msgType)) { //回复图片消息
-                // respMessage = passiveReply(msgType, fromUserName, toUserName);
+            } else if (MessageUtil.MESSAGE_IMAGE.equals(msgType)) {
+                //回复图片消息
                 respMessage = "hello world MESSAGE_IMAGE";
-            } else if (MessageUtil.MESSAGE_EVENT.equals(msgType)) { // 事件推送
+            } else if (MessageUtil.MESSAGE_EVENT.equals(msgType)) {
+                // 事件推送
                 respMessage = "hello world MESSAGE_EVENT";
             }
             TextMessage newObj = new TextMessage();
